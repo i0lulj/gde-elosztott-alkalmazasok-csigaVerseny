@@ -7,7 +7,7 @@ package csigaverseny;
 
 /**
  * 
- * @author Péter Birkás NK: il0ulj
+ * @author il0ulj
  * 
  * Az alábbi feladatot kell elkészíteni OOP szemlélettel, Git-re feltöltve:
  * A játékban 3 csiga versenyzik 5 körön keresztül, az nyer, 
