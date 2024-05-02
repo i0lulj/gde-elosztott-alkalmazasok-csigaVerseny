@@ -18,6 +18,9 @@ package csigaverseny;
  * 
  */
 
+import java.util.Random;
+import java.util.Scanner;
+
 public class CsigaVerseny {
 
     /**
@@ -27,4 +30,30 @@ public class CsigaVerseny {
         // TODO code application logic here
     }
     
+}
+
+class Csiga {
+    private String szin;
+    private int pozicio;
+
+    public Csiga(String szin) {
+        this.szin = szin;
+        this.pozicio = 0;
+    }
+
+    public String getSzin() {
+        return szin;
+    }
+
+    public int getPozicio() {
+        return pozicio;
+    }
+
+    public void lep(int lepes) {
+        pozicio += lepes;
+    }
+
+    public void csigagyorsito() {
+        pozicio *= 2;
+    }
 }
