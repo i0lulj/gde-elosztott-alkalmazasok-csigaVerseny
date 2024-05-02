@@ -59,7 +59,6 @@ public class CsigaVerseny {
 
             for (Csiga csiga : csigak) {
                 int lepes = random.nextInt(4);
-                // Ha a csiga kap csigagyorsítót, akkor a lépés duplája lesz
                 if (random.nextDouble() < 0.2) {
                     lepes *= 2;
                     System.out.println(csiga.getSzin() + " csiga kapott csigagyorsítót és dupla sebességgel lép!");
