@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
+
 package csigaverseny;
 
 /**
@@ -22,14 +23,84 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class CsigaVerseny {
+    private Csiga[] csigak;
+    private String felhasznaloTipp;
+    
+    public void fogadas() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Kérjük fogadjon egy csigára: (piros, zold vagy kek). A színeket ékezetek nélkül adja meg!");
+        felhasznaloTipp = scanner.nextLine();
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+        boolean ervenyesTipp = false;
+        for (Csiga csiga : csigak) {
+            if (csiga.getSzin().equalsIgnoreCase(felhasznaloTipp)) {
+                ervenyesTipp = true;
+                break;
+            }
+        }
+
+        if (!ervenyesTipp) {
+            System.out.print("Érvénytelen tipp! ");
+            fogadas();
+        }
     }
     
+    public CsigaVerseny() {
+        csigak = new Csiga[3];
+        csigak[0] = new Csiga("piros");
+        csigak[1] = new Csiga("zold");
+        csigak[2] = new Csiga("kek");
+    }
+    
+    public void fut() {
+        Random random = new Random();
+        for (int kor = 1; kor <= 5; kor++) {
+            System.out.println(kor + " kör:");
+
+            for (Csiga csiga : csigak) {
+                int lepes = random.nextInt(4);
+                // Ha a csiga kap csigagyorsítót, akkor a lépés duplája lesz
+                if (random.nextDouble() < 0.2) {
+                    lepes *= 2;
+                    System.out.println(csiga.getSzin() + " csiga kapott csigagyorsítót és dupla sebességgel lép!");
+                }
+                csiga.lep(lepes);
+                System.out.println(csiga.getSzin() + " csiga lép " + lepes + " egységet.");
+            }
+
+            System.out.println("----------");
+        }
+
+        System.out.println("Összesítés:");
+        for (Csiga csiga : csigak) {
+            System.out.println(csiga.getSzin() + " csiga végső pozíciója: " + csiga.getPozicio());
+        }
+
+        int maxPozicio = -1;
+        String nyertes = "";
+        for (Csiga csiga : csigak) {
+            if (csiga.getPozicio() > maxPozicio) {
+                maxPozicio = csiga.getPozicio();
+                nyertes = csiga.getSzin();
+            }
+        }
+        
+        System.out.println("----------");
+        System.out.println("A versenyt a(z) " + nyertes + " csiga nyerte!");
+        System.out.println("----------");
+        
+        if (felhasznaloTipp.equalsIgnoreCase(nyertes)) {
+            System.out.println("Gratulálunk, nyert!");
+        } else {
+            System.out.println("Sajnos nem nyert, próbálkozzon újra!");
+        }
+    }
+    
+    public static void main(String[] args) {
+        CsigaVerseny verseny = new CsigaVerseny();
+        verseny.fogadas();
+        verseny.fut();
+    }
 }
 
 class Csiga {
@@ -51,9 +122,5 @@ class Csiga {
 
     public void lep(int lepes) {
         pozicio += lepes;
-    }
-
-    public void csigagyorsito() {
-        pozicio *= 2;
     }
 }
